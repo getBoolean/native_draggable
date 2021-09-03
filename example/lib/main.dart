@@ -34,17 +34,42 @@ class _HomeScreenState extends State<HomeScreen> {
         return Scaffold(
           appBar: AppBar(title: Text('Draggable Example')),
           body: Center(
-            child: SizedBox.fromSize(
-              size: const Size(100, 100),
-              child: NativeDraggable(
-                key: _controller,
-                renderKey: 'flutter_logo',
-                child: FlutterLogo(),
-                feedback: PreferredSize(
-                  preferredSize: const Size(100, 100),
-                  child: FlutterLogo(textColor: Colors.red),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox.fromSize(
+                  size: const Size(100, 100),
+                  child: NativeDragTarget(
+                    builder: (BuildContext context, List<Object?> candidateData, List<dynamic> rejectedData) { 
+                      // For now assume it is an image
+                      if (candidateData.isEmpty) {
+                        return Container(color: Colors.amber,);
+                      } else {
+                        return Container(color: Colors.blue,);
+                      }
+                    },
+                    onWillAccept: (Object? obj) {
+                      return true;
+                    },
+                    onAccept: (Object? obj) {
+                      print('image accepted!');
+                    },
+                  ),
                 ),
-              ),
+                SizedBox.fromSize(
+                  size: const Size(100, 100),
+                  child: NativeDraggable(
+                    key: _controller,
+                    renderKey: 'flutter_logo',
+                    child: FlutterLogo(),
+                    feedback: PreferredSize(
+                      preferredSize: const Size(100, 100),
+                      child: FlutterLogo(textColor: Colors.red),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         );
