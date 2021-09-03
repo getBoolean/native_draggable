@@ -500,7 +500,7 @@ List<T?> _mapAvatarsToData<T extends Object>(List<_DragAvatar<T>> avatars) {
   return avatars.map<T?>((_DragAvatar<T> avatar) => avatar.data).toList();
 }
 
-class _DragTargetState<T extends Object> extends State<DragTarget<T>> {
+class _DragTargetState<T extends Object> extends State<NativeDragTarget<T>> {
   final List<_DragAvatar<T>> _candidateAvatars = <_DragAvatar<T>>[];
   final List<_DragAvatar<Object>> _rejectedAvatars = <_DragAvatar<Object>>[];
 
